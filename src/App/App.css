@@ -4,7 +4,6 @@
 }
 
 .tikets-content-button {
-  text-align: center;
   margin-left: 8px;
 }
 
@@ -15,10 +14,30 @@
   border: none;
   font-family: "Open Sans";
   font-size: 14px;
-  color: #4A4A4A
+  color: #4A4A4A;
+  cursor: pointer;
 }
 
 .tikets-content-button .checked {
   background-color: #2196F3;
   color: white;
+}
+
+@media screen and (max-width: 800px) {
+  #conteiner-tikets-app-id {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #tikets-content-button-id {
+    width: 100vw;
+  }
+
+  #tikets-content-button-id button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
 }
