@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Tikets.css';
+import { format } from 'date-fns'
 
 
-const Tikets = ({ tiketsInfo, stopTick }) =>
+const Tikets = ({ tiketsInfo, stopTick, sortTickets, filterTickets }) =>
 {
     let keyProp = 100
     let keyProp1 = 1000
@@ -17,7 +18,8 @@ const Tikets = ({ tiketsInfo, stopTick }) =>
 
     let fiveTickets = fiveTick.map((el) =>
     {
-        return el.slice(0, 6)
+
+        return sortTickets(filterTickets(el.slice(0, 6)))
     })
 
     function getTimeFromMins (mins)
@@ -26,16 +28,48 @@ const Tikets = ({ tiketsInfo, stopTick }) =>
         let minutes = mins % 60;
         return hours + 'ч. ' + minutes + 'м.';
     }
-    console.log(fiveTickets)
+
+    function roadStartEnd (roadStart, roadTime)
+    {
+        let date = new Date(roadStart)
+        let hours = date
+        let minutes = date
+        let roadTimeHours = new Date(
+            format(date, 'HH') + Math.floor(roadTime / 60)
+        )
+
+        let roadTimeMinutes = new Date(
+            date.setMinutes(date.getMinutes() + roadTime)
+        ).getMinutes()
+
+        return (
+            format(hours, 'HH') + ':' + format(minutes, 'mm') + ' - ' + format(roadTimeHours, 'HH') + ':' + roadTimeMinutes
+        )
+    }
+
+    // let test = fiveTick.map((el) =>
+    // {
+
+    //     return el.map((el) =>
+    //     {
+    //         el.segments.map((el) =>
+    //         {
+    //             console.log(el.duration)
+    //         })
+    //     })
+    // })
+    //console.log(fiveTickets)
     return (
         <div>
             {
                 fiveTickets.map((el) =>
                 {
                     return el.map((el) => (
-                        <div className='tikets' key={ keyProp++ }>
+                        <div className='tikets' id='tikets-id' key={ keyProp++ }>
                             <div className='tikets-price'>
-                                <p>{ el.price } P</p>
+                                <p>{
+                                    el.price.toString().slice(0, 2) + ' ' + el.price.toString().slice(2, el.price.length)
+                                } P</p>
                                 <img className='tikets-price-img' alt='AviaSales' src={ `//pics.avs.io/99/36/${el.carrier}.png` } />
                             </div>
 
@@ -50,12 +84,7 @@ const Tikets = ({ tiketsInfo, stopTick }) =>
                                                 </h4>
                                                 <p className='tikets-textInfo-text'>
                                                     {
-                                                        new Date(el.date).getHours() + ':' + new Date(el.date).getMinutes()
-                                                    }
-                                                    -
-                                                    {
-                                                        new Date(new Date(el.date).getHours() + el.duration).getHours() + ':' + new Date(new Date(el.date) + el.duration).getMinutes()
-
+                                                        roadStartEnd(el.date, el.duration)
                                                     }
                                                 </p>
                                             </div>
