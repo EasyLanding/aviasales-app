@@ -46,19 +46,6 @@ const Tikets = ({ tiketsInfo, stopTick, sortTickets, filterTickets }) =>
             format(hours, 'HH') + ':' + format(minutes, 'mm') + ' - ' + format(roadTimeHours, 'HH') + ':' + roadTimeMinutes
         )
     }
-
-    // let test = fiveTick.map((el) =>
-    // {
-
-    //     return el.map((el) =>
-    //     {
-    //         el.segments.map((el) =>
-    //         {
-    //             console.log(el.duration)
-    //         })
-    //     })
-    // })
-    //console.log(fiveTickets)
     return (
         <div>
             {

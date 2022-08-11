@@ -11,7 +11,8 @@ function App ()
   const [searchId, setSearchId] = useState()
   const [tick, setTick] = useState([])
   const [stop, setStop] = useState(false)
-  const [filter, setFilter] = useState({ all: false, without: false, one: false, two: false, three: false })
+  const [filter, setFilter] = useState({ all: true, without: true, one: true, two: true, three: true })
+  const [flagAddTickets, setFlagAddTickets] = useState(false)
 
   const [filterSort, setFilterSort] = useState({ cheap: true, fast: false, optimization: false })
 
@@ -32,7 +33,7 @@ function App ()
       }
       if (filterSort.optimization)
       {
-        sTick.sort((a, b) => (a.price - b.price) / a.price.length)
+        return sTick.sort((a, b) => (a.price + b.price) / tickets.length)
       }
       return sTick
     }, [filterSort]
@@ -48,19 +49,19 @@ function App ()
         {
           return cur
         }
-        if (filter.without && cur.segments[0].stops.length === 0 && cur.segments[1].stops.length === 0)
+        if (filter.without && (cur.segments[0].stops.length === 0 || cur.segments[1].stops.length === 0))
         {
           return flag
         }
-        if (filter.one && cur.segments[0].stops.length === 1 && cur.segments[1].stops.length === 1)
+        if (filter.one && (cur.segments[0].stops.length === 1 || cur.segments[1].stops.length === 1))
         {
           return flag
         }
-        if (filter.two && cur.segments[0].stops.length === 2 && cur.segments[1].stops.length === 2)
+        if (filter.two && (cur.segments[0].stops.length === 2 || cur.segments[1].stops.length === 2))
         {
           return flag
         }
-        if (filter.three && cur.segments[0].stops.length === 3 && cur.segments[1].stops.length === 3)
+        if (filter.three && (cur.segments[0].stops.length === 3 || cur.segments[1].stops.length === 3))
         {
           return flag
         }
@@ -128,23 +129,51 @@ function App ()
     {
       if (filterSort[button]) return
 
-
-      setFilterSort({ cheap: !filterSort['cheap'], fast: !filterSort['fast'], optimization: !filterSort['optimization'] })
+      if (button === 'cheap')
+      {
+        setFilterSort({ cheap: !filterSort['cheap'] })
+      }
+      if (button === 'fast')
+      {
+        setFilterSort({ fast: !filterSort['fast'] })
+      }
+      if (button === 'optimization')
+      {
+        setFilterSort({ optimization: !filterSort['optimization'] })
+      }
 
     },
     [filterSort]
   )
-  const withoutFilterHandler = () =>
+  const withoutFilterHandler = (temp) =>
   {
-    if (!filter.all)
+    let tempFilter = { ...filter }
+    tempFilter[temp] = !tempFilter[temp]
+    if (temp === 'all')
     {
-      setFilter({ all: true, without: true, one: true, two: true, three: true })
+      tempFilter = Object.fromEntries(
+        Object.keys(tempFilter).map((el) =>
+        {
+          return [el, tempFilter[temp]]
+        })
+      )
     } else
     {
-      setFilter({ all: false, without: false, one: false, two: false, three: false })
+      if (Object.keys(tempFilter).some((key) => tempFilter[key] === false))
+      {
+        tempFilter['all'] = false
+      }
+      if (Object.keys(tempFilter).every((key) =>
+      {
+        if (key === 'all') return true
+        return tempFilter[key] === true
+      }))
+      {
+        tempFilter['all'] = true
+      }
     }
+    setFilter({ ...tempFilter })
   }
-
 
   return (
     <div className="App">
@@ -167,13 +196,29 @@ function App ()
               onClick={ () => sortHandler('optimization') }
             >Оптимальный</button>
           </div>
+
           <Tikets
             filterTickets={ filterTickets }
             tiketsInfo={ tick }
             stopTick={ stop }
             sortTickets={ sortTickets }
           />
-          <ButtonTikets />
+          {
+            flagAddTickets ?
+              <Tikets
+                filterTickets={ filterTickets }
+                tiketsInfo={ tick }
+                stopTick={ stop }
+                sortTickets={ sortTickets }
+              />
+              : null
+          }
+          <div id='ButtonTikets'>
+            <ButtonTikets
+              flagAddTickets={ flagAddTickets }
+              stFlagAddTickets={ setFlagAddTickets }
+            />
+          </div>
         </div>
       </div>
     </div>
