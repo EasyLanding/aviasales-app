@@ -38,7 +38,7 @@ const Tikets = ({ tiketsInfo, slices }) =>
                             <div className='tikets-price'>
                                 <p>{
                                     Utils.priceEditor(el['price'])
-                                } P</p>
+                                }</p>
                                 <img className='tikets-price-img' alt='AviaSales' src={ `//pics.avs.io/99/36/${el.carrier}.png` } />
                             </div>
 
