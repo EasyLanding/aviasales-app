@@ -1,12 +1,15 @@
 import React from 'react';
 import './ButtonTickets.css';
+import { incrementTicketsItem } from '../../redux/tickets'
+import { useDispatch } from 'react-redux'
 
-const ButtonTikets = ({ flagAddTickets, stFlagAddTickets }) =>
+const ButtonTikets = () =>
 {
+    const dispatch = useDispatch()
     return (
         <button
             className="tikets-buttons-more"
-            onClick={ () => stFlagAddTickets(flagAddTickets = true) }
+            onClick={ () => dispatch(incrementTicketsItem()) }
         >Показать еще 5 билетов!</button>
     )
 }

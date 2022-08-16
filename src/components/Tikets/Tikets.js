@@ -1,33 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import './Tikets.css';
 import { format } from 'date-fns'
+import Utils from '../../utils'
 
 
-const Tikets = ({ tiketsInfo, stopTick, sortTickets, filterTickets }) =>
+const Tikets = ({ tiketsInfo, slices }) =>
 {
     let keyProp = 100
     let keyProp1 = 1000
-    const [fiveTick, setFiveTick] = useState([])
-    useEffect(() =>
-    {
-        if (stopTick === true)
-        {
-            setFiveTick(tiketsInfo.slice(0, 1))
-        }
-    }, [stopTick, tiketsInfo])
 
-    let fiveTickets = fiveTick.map((el) =>
-    {
+    let fiveTickets = tiketsInfo.slice(0, slices)
 
-        return sortTickets(filterTickets(el.slice(0, 6)))
-    })
-
-    function getTimeFromMins (mins)
-    {
-        let hours = Math.trunc(mins / 60);
-        let minutes = mins % 60;
-        return hours + 'ч. ' + minutes + 'м.';
-    }
 
     function roadStartEnd (roadStart, roadTime)
     {
@@ -51,11 +33,11 @@ const Tikets = ({ tiketsInfo, stopTick, sortTickets, filterTickets }) =>
             {
                 fiveTickets.map((el) =>
                 {
-                    return el.map((el) => (
+                    return (
                         <div className='tikets' id='tikets-id' key={ keyProp++ }>
                             <div className='tikets-price'>
                                 <p>{
-                                    el.price.toString().slice(0, 2) + ' ' + el.price.toString().slice(2, el.price.length)
+                                    Utils.priceEditor(el['price'])
                                 } P</p>
                                 <img className='tikets-price-img' alt='AviaSales' src={ `//pics.avs.io/99/36/${el.carrier}.png` } />
                             </div>
@@ -77,9 +59,7 @@ const Tikets = ({ tiketsInfo, stopTick, sortTickets, filterTickets }) =>
                                             </div>
                                             <div className='tickets-textInfo-block'><h4 className='tikets-textInfo-header'>В пути</h4>
                                                 <p className='tikets-textInfo-text'>
-                                                    {
-                                                        getTimeFromMins(el.duration)
-                                                    }
+                                                    { Utils.changeStopsDeclension(el['stops']) }
                                                 </p>
                                             </div>
                                             <div className='tickets-textInfo-block'><h4 className='tikets-textInfo-header'>Кол-во пересадок: { el.stops.length }</h4><p className='tikets-textInfo-text'>{ el.stops.join(', ') }</p></div>
@@ -88,7 +68,6 @@ const Tikets = ({ tiketsInfo, stopTick, sortTickets, filterTickets }) =>
                                 ))
                             }
                         </div>
-                    )
                     )
                 })
             }

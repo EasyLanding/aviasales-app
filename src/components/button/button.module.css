@@ -1,0 +1,39 @@
+.buttons {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #dfe5ec;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: 1px;
+    width: 167px;
+    text-transform: uppercase;
+}
+
+.buttons:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.buttons:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.activeBtn {
+    background-color: #2196f3;
+    color: white;
+}
+
+@media (max-width: 790px) {
+    .articleButtons {
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .buttons {
+        width: 147px;
+        font-size: 10px;
+    }
+}
