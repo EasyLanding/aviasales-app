@@ -44,8 +44,9 @@ const Tikets = ({ tiketsInfo, slices }) =>
 
 
                             {
-                                el.segments.map((el) => (
-                                    <div key={ keyProp1++ }>
+                                el.segments.map((el) =>
+                                (
+                                    < div key={ keyProp1++ }>
                                         <div className='tikets-textInfo-conteiner1'>
                                             <div className='tickets-textInfo-block'>
                                                 <h4 className='tikets-textInfo-header'>
@@ -59,10 +60,10 @@ const Tikets = ({ tiketsInfo, slices }) =>
                                             </div>
                                             <div className='tickets-textInfo-block'><h4 className='tikets-textInfo-header'>В пути</h4>
                                                 <p className='tikets-textInfo-text'>
-                                                    { Utils.changeStopsDeclension(el['stops']) }
+                                                    { Utils.duration(el.duration) }
                                                 </p>
                                             </div>
-                                            <div className='tickets-textInfo-block'><h4 className='tikets-textInfo-header'>Кол-во пересадок: { el.stops.length }</h4><p className='tikets-textInfo-text'>{ el.stops.join(', ') }</p></div>
+                                            <div className='tickets-textInfo-block1'><h4 className='tikets-textInfo-header'>Кол-во пересадок: { el.stops.length }</h4><p className='tikets-textInfo-text'>{ el.stops.join(', ') }</p></div>
                                         </div>
                                     </div>
                                 ))
@@ -71,7 +72,7 @@ const Tikets = ({ tiketsInfo, slices }) =>
                     )
                 })
             }
-        </div>
+        </div >
     )
 }
 

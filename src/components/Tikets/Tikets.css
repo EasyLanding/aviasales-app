@@ -28,7 +28,7 @@
     font-size: 24px;
     font-family: "Open Sans";
     margin-top: 20px;
-    margin-left: 45px;
+    margin-left: 20px;
     margin-bottom: 0px;
 }
 
@@ -43,8 +43,8 @@
 
 .tikets-textInfo-conteiner1 {
     display: flex;
-    /* justify-content: space-around; */
-    margin-top: 10px;
+    justify-content: space-around;
+    margin-top: 15px;
     /* margin-left: 10px;
     margin-right: 10px; */
 }
@@ -65,7 +65,13 @@
 }
 
 .tickets-textInfo-block {
-    margin-left: 70px;
+    /* margin-left: 50px; */
+    width: 110px;
+}
+
+.tickets-textInfo-block1 {
+    /* margin-left: auto; */
+    width: 140px;
 }
 
 @media screen and (max-width: 800px) {
