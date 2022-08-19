@@ -53,29 +53,31 @@ const CheckBoxTickets = () =>
         }
     }
     return (
-        <aside className={ sideFilterStyle.selectFilter }>
-            <div className={ sideFilterStyle.selectFilter__body }>
-                <div className={ sideFilterStyle.selectFilter__title }>Количество пересадок</div>
-                <form action='' className={ sideFilterStyle.selectFilter__form }>
-                    {
-                        transfers.map(item => (
-                            <label key={ item.name }>
-                                <input
-                                    type='checkbox'
-                                    className={ sideFilterStyle.checkHidden }
-                                    name={ item.name }
-                                    id={ item.name }
-                                    checked={ item.checked }
-                                    onChange={ () => handleCheckFilter(item.name) }
-                                />
-                                { item.name }
-                                <span className={ sideFilterStyle.checker }></span>
-                            </label>
-                        ))
-                    }
-                </form>
-            </div>
-        </aside>
+        <div className={ sideFilterStyle.selectFilter__conteiner }>
+            <aside className={ sideFilterStyle.selectFilter }>
+                <div className={ sideFilterStyle.selectFilter__body }>
+                    <div className={ sideFilterStyle.selectFilter__title }>Количество пересадок</div>
+                    <form action='' className={ sideFilterStyle.selectFilter__form }>
+                        {
+                            transfers.map(item => (
+                                <label key={ item.name }>
+                                    <input
+                                        type='checkbox'
+                                        className={ sideFilterStyle.checkHidden }
+                                        name={ item.name }
+                                        id={ item.name }
+                                        checked={ item.checked }
+                                        onChange={ () => handleCheckFilter(item.name) }
+                                    />
+                                    { item.name }
+                                    <span className={ sideFilterStyle.checker }></span>
+                                </label>
+                            ))
+                        }
+                    </form>
+                </div>
+            </aside>
+        </div>
     )
 }
 

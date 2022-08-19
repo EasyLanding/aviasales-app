@@ -1,4 +1,6 @@
 .buttons {
+    margin-left: 5px;
+    margin-bottom: 20px;
     padding: 15px;
     background-color: #fff;
     border: 1px solid #dfe5ec;
@@ -26,10 +28,12 @@
     color: white;
 }
 
-@media (max-width: 790px) {
+@media (max-width: 835px) {
     .articleButtons {
         display: flex !important;
         justify-content: center !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .buttons {

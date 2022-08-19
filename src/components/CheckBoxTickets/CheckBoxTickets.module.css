@@ -1,5 +1,5 @@
 .selectFilter {
-    min-width: 16.5em;
+    width: 16.5em;
     height: 252px;
     background: white;
     display: flex;
@@ -8,7 +8,7 @@
     border-radius: 5px;
     font-family: 'Open Sans', sans-serif;
     margin-right: 20px;
-    min-height: 262px;
+    height: 262px;
 }
 
 .selectFilter__body {
@@ -61,11 +61,15 @@ input:checked+.checker {
     background-image: url('../../assets/checked/checker-on.svg');
 }
 
-@media (max-width: 790px) {
+@media (max-width: 800px) {
     .selectFilter {
         display: flex;
         justify-self: start;
-        max-width: 50px;
         margin-left: 20%;
+    }
+
+    .selectFilter__conteiner {
+        display: flex;
+        justify-content: center;
     }
 }
